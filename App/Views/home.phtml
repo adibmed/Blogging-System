@@ -1,0 +1,8 @@
+
+<?php include VIEWS . 'partials/header.phtml'; ?>
+<h1>Home Page</h1>
+<?php
+    if(isset($this->view_data['name'])) {
+        echo '<h3>Welcome ' .  $this->view_data['name'] . '</h3>';
+    }
+?>

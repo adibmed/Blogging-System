@@ -1,0 +1,32 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.pt {
+    padding-top: 5px;
+}
+
+nav {
+    background: #E91E63;
+}
+
+nav ul {
+    list-style-type: none;
+}
+nav ul li {
+    display: inline-block;
+}
+nav ul li a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #fff;
+}
+.post {
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    margin: 5px;
+    box-shadow: 1px 2px 3px 0px #e3e3e3;
+}

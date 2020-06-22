@@ -1,10 +1,7 @@
 <?php
 
-$route->get('/home', 'homeController');
-
-$route->get('/users', 'userController');
-
 $route->get('/home', 'postController');
+$route->get('/post/add', 'postController::add');
+$route->get('/post/{id}', 'postController::show');
 
-
-$route->get('/post/add', 'postController');
+$route->get('/about', 'aboutController');

@@ -1,7 +1,9 @@
 <?php include VIEWS . 'partials/header.phtml'; ?>
-<div class="post">
-    <?php
-    echo '<h2>' . $this->view_data['title'] . '</h2>' . App\Models\User::find($this->view_data['user_id'] - 1)['username'] . ' | ' . $this->view_data['added_at'];
-    echo '<p class="pt">' . $this->view_data['body'] . '</p>';
-    ?>
+<div class="container">
+    <div class="post">
+        <?php
+        echo '<h2>' . $this->view_data['title'] . '</h2>' .  'User | ' . $this->view_data['added_at'];
+        echo '<p class="pt">' . $this->view_data['body'] . '</p>';
+        ?>
+    </div>
 </div>

@@ -18,6 +18,10 @@ class postController extends Controller
     public function add()
     {
         $this->view('post' . DIRECTORY_SEPARATOR . 'add', []);
-        $this->ivew->render();
+        $this->view->render();
+    }
+    public function edit()
+    {
+        echo '<h1>Edit post</h1>';
     }
 }

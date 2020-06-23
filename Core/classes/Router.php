@@ -31,6 +31,12 @@ class Router
             $view_404 = new View('404', []);
             $view_404->render();
         } else $this->matched_route = $this->routes[$this->request->getMethod()][$this->request->getUrl()];
+
+        // var_dump($this->matched_route);
+        // foreach($this->routes[$this->request->getMethod()] as $route) {
+        //     $pattern = '';
+        //     $matches = array();
+        // }
     }
 
     public function get($path, $handler)
@@ -59,23 +65,35 @@ class Router
             return $collable();
         } else {
 
-
-            //$this->action = explode('/', $this->request->getUrl()[1]);
+            if (strpos($collable, '::')) {
+                $this->action =  substr($collable, strpos($collable, '::') + 2, strlen($collable));
+                $this->controller =  substr($collable, 0, strpos($collable, '::'));
+            }
             $this->params = $this->request->getParams();
 
-            $this->controller = 'App\Controllers\\' . $collable;
+            $this->controller = 'App\Controllers\\' . $this->controller;
 
             if (class_exists($this->controller)) {
 
                 $controller_obj =  new $this->controller;
 
-                if (method_exists($this->controller, $this->action)) {
-                    // $a = $this->action;
-                    // $controller_obj->$a();
-
-                    call_user_func_array([$controller_obj, $this->action], $this->params);
+                if (method_exists($controller_obj, $this->action)) {
+                    call_user_func_array([$controller_obj, $this->action], ['params' => $this->getParams()]);
                 } else echo 'Method not exist</br>';
             } else echo 'class not found</br>';
         }
+    }
+
+    private function getParams()
+    {
+        //var_dump($this->request->getParams());
+        return $this->request->getParams();
+    }
+
+    public function printBig($test)
+    {
+        echo '<h1>';
+        var_dump($test);
+        echo '</h1>';
     }
 }

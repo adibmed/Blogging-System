@@ -30,8 +30,7 @@ class Router
         if (!array_key_exists($this->request->getUrl(), $this->routes[$this->request->getMethod()])) {
             $view_404 = new View('404', []);
             $view_404->render();
-        }
-        else $this->matched_route = $this->routes[$this->request->getMethod()][$this->request->getUrl()];
+        } else $this->matched_route = $this->routes[$this->request->getMethod()][$this->request->getUrl()];
     }
 
     public function get($path, $handler)
@@ -59,31 +58,24 @@ class Router
         if (is_callable($this->matched_route)) {
             return $collable();
         } else {
-            
+
 
             //$this->action = explode('/', $this->request->getUrl()[1]);
             $this->params = $this->request->getParams();
 
-            $this->controller = 'App\Controllers\\' . $collable;     
-
-            // echo 'Controller : ' . $this->controller . '<br>';
-            // echo 'Action : ' . $this->action;    
+            $this->controller = 'App\Controllers\\' . $collable;
 
             if (class_exists($this->controller)) {
 
-               $controller_obj =  new $this->controller;
+                $controller_obj =  new $this->controller;
 
                 if (method_exists($this->controller, $this->action)) {
-                    $a = $this->action;
-                    $controller_obj->$a();
-                    
-                    echo '<pre>';
-                    call_user_func_array([$this->controller, $this->action], []);
-                    echo '</pre>';
-                }       
-                else echo 'Method not exist';
-            } 
-            else echo 'class not found';
+                    // $a = $this->action;
+                    // $controller_obj->$a();
+
+                    call_user_func_array([$controller_obj, $this->action], $this->params);
+                } else echo 'Method not exist</br>';
+            } else echo 'class not found</br>';
         }
     }
 }

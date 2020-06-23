@@ -21,5 +21,4 @@ class View
             echo 'View : <b>' . $this->view_file . '</b> not found';
         }
     }
-
 }
